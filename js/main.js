@@ -2,6 +2,9 @@ $(document).ready(function() {
 
     $('#search').click(function() {
         var userSearch = $('#userSearch').val();
+        if (userSearch === "") {
+            return
+        }
         var source = document.getElementById("films-template").innerHTML;
         var template = Handlebars.compile(source);
 
@@ -15,6 +18,7 @@ $(document).ready(function() {
             },
             success: function(data, stato) {
                 var films = data.results;
+                console.log(films);
                 for (i = 0; i < films.length; i++) {
                     var context = {
                         title: films[i].title,
