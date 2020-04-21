@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title></title>
+</head>
+
+<body>
+    <div>
+        <input type="text" name="" id="userSearch">
+        <button id="search">Cerca</button>
+    </div>
+    <!--haldlebars template------------------------->
+    <script id="films-template" type="text/x-handlebars-template">
+        <ul id="filmList">
+            <li>Titolo: {{title}}</li>
+            <li>Titolo Originale: {{originalTitle}}</li>
+            <li>Lingua: {{language}}</li>
+            <li>Voto: {{vote}}</li>
+            <li></li>
+        </ul>
+    </script>
+    <!--librerie--------------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
