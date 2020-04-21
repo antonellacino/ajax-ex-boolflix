@@ -15,7 +15,7 @@ $(document).ready(function() {
             },
             success: function(data, stato) {
                 var films = data.results;
-                for (i = 1; i < films.length; i++) {
+                for (i = 0; i < films.length; i++) {
                     var context = {
                         title: films[i].title,
                         originalTitle: films[i].original_title,
