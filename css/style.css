@@ -3,3 +3,11 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+.film li:last-child {
+    margin-bottom: 30px;
+}
+
+.background {
+    color: yellow;
+}

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="fontawesome/css/all.css">
     <link rel="stylesheet" href="css/style.css">
     <title></title>
 </head>
@@ -13,14 +14,25 @@
         <input type="text" name="" id="userSearch">
         <button id="search">Cerca</button>
     </div>
-    <!--haldlebars template------------------------->
+
+    <div class="filmList">
+
+    </div>
+    <!--handlebars template------------------------->
     <script id="films-template" type="text/x-handlebars-template">
-        <ul id="filmList">
+        <ul class="film">
             <li>Titolo: {{title}}</li>
             <li>Titolo Originale: {{originalTitle}}</li>
-            <li>Lingua: {{language}}</li>
-            <li>Voto: {{vote}}</li>
-            <li></li>
+            <li>Lingua: {{{language}}}</li>
+            <!--stelline-->
+            <li>Voto:
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+            </li>
+            <li>Tipo: {{type}}</li>
         </ul>
     </script>
     <!--librerie--------------------------------->
