@@ -10,26 +10,45 @@
 </head>
 
 <body>
-    <div>
-        <input type="text" name="" id="userSearch">
-        <button id="search">Cerca</button>
+    <div class="container">
+        <header class="top">
+            <div>
+                <span>BOOLFLIX</span>
+            </div>
+            <div class="search">
+                <input type="text" name="" id="userSearch">
+                <button id="search">Cerca</button>
+            </div>
+        </header>
+        <main class="container">
+
+            <div class="filmList">
+
+            </div>
+
+        </main>
+        <footer>
+            <h3>Powered by Antonella</h3>
+        </footer>
     </div>
 
-    <div class="filmList">
-
-    </div>
     <!--handlebars template------------------------->
     <script id="films-template" type="text/x-handlebars-template">
         <ul class="film">
-            <li>{{{cover}}}</li>
-            <li>Titolo: {{title}}</li>
-            <li>Titolo Originale: {{originalTitle}}</li>
-            <li>Lingua: {{{language}}}</li>
-            <!--stelline-->
-            <li>Voto:{{{vote}}}</li>
-            <li>Tipo: {{type}}</li>
+            <div class="cover">{{{cover}}}</div>
+            <div>
+                <h2>Titolo: {{title}}</h2>
+                <li>Titolo Originale: {{originalTitle}}</li>
+                <li>Lingua: {{{language}}}</li>
+                <!--stelline-->
+                <li>Voto:{{{vote}}}</li>
+                <li>Tipo: {{type}}</li>
+            </div>
         </ul>
     </script>
+
+
+
     <!--librerie--------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

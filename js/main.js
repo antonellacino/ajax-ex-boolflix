@@ -2,13 +2,11 @@ $(document).ready(function() {
     var source = document.getElementById("films-template").innerHTML;
     var template = Handlebars.compile(source);
 
-
     $('#search').click(function() {
         var userSearch = $('#userSearch').val();
         if (userSearch === "") {
             return
         }
-
         //chiamata ajax films
         $.ajax({
             method: "GET",
@@ -28,8 +26,6 @@ $(document).ready(function() {
                 alert("E' avvenuto un errrore." + errore);
             }
         });
-
-
 
         //chiamata ajax serie tv
         $.ajax({
@@ -52,49 +48,10 @@ $(document).ready(function() {
         });
     });
 
-
-
     //-----------FUNZIONI-------------------------------------------------------
-
-    function selectedFlags(type) {
-        var flags = ["it", "en", "es"];
-        var flag;
-        if (flags.includes(type)) {
-            flag = "<img src='img/" + type + ".png'>";
-            return flag;
-        }
-        return type;
-    }
-
-    function generaStelle(number) {
-        //dividere il voto in base 5
-        var voto = Math.ceil(number / 2);
-        var stars = "";
-        for (var i = 1; i <= 5; i++) {
-            if (i <= voto) {
-                //inserisci stella piena
-                stars += '<i class="fas fa-star"></i>';
-            } else {
-                //inserisci stella vuota
-                stars += '<i class="far fa-star"></i>'
-            }
-        }
-        return stars;
-    }
-
-    function generateCover(url) {
-        var cover = "<img src='https://image.tmdb.org/t/p/w154/" + url + "'>";
-        if (url === null) {
-            cover = "";
-        }
-        return cover;
-    }
-
-
 
     function generaFilmList(films, type) {
         for (i = 0; i < films.length; i++) {
-
             //controllo se si tratta di un film o di una serie tv
             var title, originalTitle;
             if (type === "Movie") {
@@ -112,9 +69,42 @@ $(document).ready(function() {
                 vote: generaStelle(films[i].vote_average),
                 type: type
             };
-            console.log(generateCover(films[i].poster_path), );
             var html = template(context);
             $('.filmList').append(html);
         }
+    }
+    //-----------------------------------------------------------------------
+    function generateCover(url) {
+        var cover = "<img src='https://image.tmdb.org/t/p/w154/" + url + "'>";
+        if (url === null) {
+            cover = "";
+        }
+        return cover;
+    }
+    //-----------------------------------------------------------------------
+    function selectedFlags(type) {
+        var flags = ["it", "en", "es"];
+        var flag;
+        if (flags.includes(type)) {
+            flag = "<img src='img/" + type + ".png'>";
+            return flag;
+        }
+        return type;
+    }
+    //-------------------------------------------------------------------------
+    function generaStelle(number) {
+        //dividere il voto in base 5
+        var voto = Math.ceil(number / 2);
+        var stars = "";
+        for (var i = 1; i <= 5; i++) {
+            if (i <= voto) {
+                //inserisci stella piena
+                stars += '<i class="fas fa-star"></i>';
+            } else {
+                //inserisci stella vuota
+                stars += '<i class="far fa-star"></i>'
+            }
+        }
+        return stars;
     }
 });

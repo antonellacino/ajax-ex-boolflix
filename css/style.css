@@ -1,9 +1,76 @@
+/*REGOLE GENERICHE------------*/
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
+.container {
+    width: 80%;
+    margin: auto;
+    background-color: #130e0e;
+}
+
+main {
+    min-height: 400px;
+}
+
+
+/*----HEADER-------------------------*/
+
+.top {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d50620;
+}
+
+.top span {
+    font-weight: bold;
+    font-size: 30px;
+    margin-left: 20px;
+}
+
+.search {
+    margin-right: 30px;
+}
+
+
+/*----MAIN----------------------*/
+
+.film {
+    display: flex;
+    list-style: none;
+    margin: 10px;
+    background-color: #3e3c3c;
+    color: white;
+}
+
 .film li:last-child {
     margin-bottom: 30px;
+}
+
+.cover img {
+    width: 100px;
+}
+
+
+/*----FOOTER-------------------*/
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    background-color: #d50620;
+}
+
+#search {
+    width: 150px;
+}
+
+#userSearch {
+    width: 200px;
 }
