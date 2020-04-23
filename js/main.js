@@ -82,27 +82,37 @@ $(document).ready(function() {
         return stars;
     }
 
+    function generateCover(url) {
+        var cover = "<img src='https://image.tmdb.org/t/p/w154/" + url + "'>";
+        if (url === null) {
+            cover = "";
+        }
+        return cover;
+    }
+
+
+
     function generaFilmList(films, type) {
         for (i = 0; i < films.length; i++) {
-            var title, originalTitle;
 
-            //controllo se si tratta di un film
+            //controllo se si tratta di un film o di una serie tv
+            var title, originalTitle;
             if (type === "Movie") {
                 title = films[i].title;
                 originalTitle = films[i].original_title;
-            } //controllo se si tratta di una serie tv
-            else if (type === "SerieTv") {
+            } else if (type === "SerieTv") {
                 title = films[i].name;
                 originalTitle = films[i].original_name;
             }
             var context = {
+                cover: generateCover(films[i].poster_path),
                 title: title,
                 originalTitle: originalTitle,
                 language: selectedFlags(films[i].original_language),
                 vote: generaStelle(films[i].vote_average),
                 type: type
             };
-            console.log(generaStelle(films[i].vote_average));
+            console.log(generateCover(films[i].poster_path), );
             var html = template(context);
             $('.filmList').append(html);
         }
