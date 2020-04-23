@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var source = document.getElementById("films-template").innerHTML;
     var template = Handlebars.compile(source);
-    var flags = ["it", "en", "es"];
+
 
     $('#search').click(function() {
         var userSearch = $('#userSearch').val();
@@ -9,7 +9,7 @@ $(document).ready(function() {
             return
         }
 
-        // //chiamata ajax films
+        //chiamata ajax films
         $.ajax({
             method: "GET",
             url: "https://api.themoviedb.org/3/search/movie",
@@ -21,21 +21,8 @@ $(document).ready(function() {
             success: function(data, stato) {
                 var films = data.results;
                 console.log(films);
-                for (i = 0; i < films.length; i++) {
-                    //selezione bandiera
-                    var flag = selectedFlags(films[i].original_language);
-                    var context = {
-                        title: films[i].title,
-                        originalTitle: films[i].original_title,
-                        language: flag,
-                        type: "Film",
-                    };
-                    var html = template(context);
-                    var vote = parseInt(films[i].vote_average / 2);
-                    $('.filmList').append(html);
-                    //generazione delle stelle
-                    generaStelle(vote);
-                };
+                //-------------genera lista (film,"film")
+                generaFilmList(films, "Movie");
             },
             error: function(richiesta, stato, errori) {
                 alert("E' avvenuto un errrore." + errore);
@@ -54,26 +41,10 @@ $(document).ready(function() {
                 query: userSearch
             },
             success: function(data, stato) {
-                var films = data.results;
-                console.log(films);
-                for (i = 0; i < films.length; i++) {
-                    //selezione bandiera
-                    var flag = selectedFlags(films[i].original_language);
-
-                    console.log("il voto " + vote);
-                    var context = {
-                        title: films[i].name,
-                        originalTitle: films[i].original_name,
-                        language: flag,
-                        type: "Serie Tv"
-                    };
-                    var html = template(context);
-                    var vote = parseInt(films[i].vote_average / 2);
-
-                    $('.filmList').append(html);
-                    generaStelle(vote);
-
-                };
+                var series = data.results;
+                console.log(series);
+                //-------------genera lista (film,"serieTv")
+                generaFilmList(series, "SerieTv")
             },
             error: function(richiesta, stato, errori) {
                 alert("E' avvenuto un errrore." + errore);
@@ -86,18 +57,54 @@ $(document).ready(function() {
     //-----------FUNZIONI-------------------------------------------------------
 
     function selectedFlags(type) {
+        var flags = ["it", "en", "es"];
+        var flag;
         if (flags.includes(type)) {
             flag = "<img src='img/" + type + ".png'>";
-        } else {
-            flag = type;
+            return flag;
         }
-        return flag;
+        return type;
     }
 
     function generaStelle(number) {
-        for (var i = 0; i < number; i++) {
-            $(".film:last-child .fa-star").eq(i).addClass('background');
+        //dividere il voto in base 5
+        var voto = Math.ceil(number / 2);
+        var stars = "";
+        for (var i = 1; i <= 5; i++) {
+            if (i <= voto) {
+                //inserisci stella piena
+                stars += '<i class="fas fa-star"></i>';
+            } else {
+                //inserisci stella vuota
+                stars += '<i class="far fa-star"></i>'
+            }
         }
+        return stars;
     }
 
+    function generaFilmList(films, type) {
+        for (i = 0; i < films.length; i++) {
+            var title, originalTitle;
+
+            //controllo se si tratta di un film
+            if (type === "Movie") {
+                title = films[i].title;
+                originalTitle = films[i].original_title;
+            } //controllo se si tratta di una serie tv
+            else if (type === "SerieTv") {
+                title = films[i].name;
+                originalTitle = films[i].original_name;
+            }
+            var context = {
+                title: title,
+                originalTitle: originalTitle,
+                language: selectedFlags(films[i].original_language),
+                vote: generaStelle(films[i].vote_average),
+                type: type
+            };
+            console.log(generaStelle(films[i].vote_average));
+            var html = template(context);
+            $('.filmList').append(html);
+        }
+    }
 });
