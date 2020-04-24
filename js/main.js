@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    var apiKey = "a7062847b5ee154e2868e4f86456d640";
     var source = document.getElementById("films-template").innerHTML;
     var template = Handlebars.compile(source);
 
@@ -7,49 +8,41 @@ $(document).ready(function() {
         if (userSearch === "") {
             return
         }
-        //chiamata ajax films
-        $.ajax({
-            method: "GET",
-            url: "https://api.themoviedb.org/3/search/movie",
-            data: {
-                api_key: "a7062847b5ee154e2868e4f86456d640",
-                language: "it-IT",
-                query: userSearch
-            },
-            success: function(data, stato) {
-                var films = data.results;
-                console.log(films);
-                //-------------genera lista (film,"film")
-                generaFilmList(films, "Movie");
-            },
-            error: function(richiesta, stato, errori) {
-                alert("E' avvenuto un errrore." + errore);
-            }
-        });
 
-        //chiamata ajax serie tv
+        //chiamata ajax films
+        callFilmList("https://api.themoviedb.org/3/search/movie", apiKey, userSearch, "Film");
+        //chiamata ajax serieTv
+        callFilmList("https://api.themoviedb.org/3/search/tv", apiKey, userSearch, "SerieTv");
+
+
+
+    });
+
+    //-----------FUNZIONI-------------------------------------------------------
+
+    //funzione chiamate ajax
+    function callFilmList(url, apikey, queryString, type) {
         $.ajax({
             method: "GET",
-            url: "https://api.themoviedb.org/3/search/tv",
+            url: url,
             data: {
-                api_key: "a7062847b5ee154e2868e4f86456d640",
+                api_key: apikey,
                 language: "it-IT",
-                query: userSearch
+                query: queryString
             },
             success: function(data, stato) {
                 var series = data.results;
                 console.log(series);
                 //-------------genera lista (film,"serieTv")
-                generaFilmList(series, "SerieTv")
+                generaFilmList(series, type)
             },
             error: function(richiesta, stato, errori) {
                 alert("E' avvenuto un errrore." + errore);
             }
         });
-    });
+    }
 
-    //-----------FUNZIONI-------------------------------------------------------
-
+    //------------------------------------------------------------------------   
     function generaFilmList(films, type) {
         for (i = 0; i < films.length; i++) {
             //controllo se si tratta di un film o di una serie tv
@@ -75,9 +68,9 @@ $(document).ready(function() {
     }
     //-----------------------------------------------------------------------
     function generateCover(url) {
-        var cover = "<img src='https://image.tmdb.org/t/p/w154/" + url + "'>";
+        var cover = "<img src='https://image.tmdb.org/t/p/w185/" + url + "'>";
         if (url === null) {
-            cover = "";
+            cover = "Immagine non disponibile";
         }
         return cover;
     }
@@ -107,4 +100,5 @@ $(document).ready(function() {
         }
         return stars;
     }
+
 });
