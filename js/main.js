@@ -58,6 +58,7 @@ $(document).ready(function() {
                 originalTitle: originalTitle,
                 language: selectedFlags(films[i].original_language),
                 vote: generaStelle(films[i].vote_average),
+                overview: generateOverview(films[i].overview),
                 type: type
             };
             var html = template(context);
@@ -91,7 +92,7 @@ $(document).ready(function() {
         for (var i = 1; i <= 5; i++) {
             if (i <= voto) {
                 //inserisci stella piena
-                stars += '<i class="fas fa-star"></i>';
+                stars += '<i class="fas fa-star yellow"></i>';
             } else {
                 //inserisci stella vuota
                 stars += '<i class="far fa-star"></i>'
@@ -99,5 +100,11 @@ $(document).ready(function() {
         }
         return stars;
     }
-
+    //----------------------------------------------------------------------   
+    function generateOverview(arg) {
+        if (arg === "") {
+            arg = "Trama non disponibile";
+        }
+        return arg;
+    }
 });

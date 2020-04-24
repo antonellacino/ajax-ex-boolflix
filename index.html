@@ -34,7 +34,6 @@
 
     <!--handlebars template------------------------->
     <script id="films-template" type="text/x-handlebars-template">
-
         <ul class="film">
             <div class="cover">{{{cover}}}</div>
             <div class="details hidden">
@@ -42,11 +41,11 @@
                 <li>Titolo Originale: {{originalTitle}}</li>
                 <li>Lingua: {{{language}}}</li>
                 <!--stelline-->
-                <li>Voto:{{{vote}}}</li>
-                <li>Tipo: {{type}}</li>
+                <li>Voto: {{{vote}}}</li>
+                <li class="overview">Trama: {{{overview}}}</li>
             </div>
+            <li class="center">{{type}}</li>
         </ul>
-
     </script>
 
 

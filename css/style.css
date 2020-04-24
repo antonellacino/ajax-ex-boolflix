@@ -25,6 +25,10 @@ main {
     height: 278px;
 }
 
+.yellow {
+    color: yellow;
+}
+
 
 /*----HEADER-------------------------*/
 
@@ -67,12 +71,8 @@ main {
     margin: 20px;
     color: white;
     height: 300px;
-    width: 200px;
+    width: 185px;
     position: relative;
-}
-
-.film li:last-child {
-    margin-bottom: 30px;
 }
 
 .film:hover .details {
@@ -81,12 +81,29 @@ main {
 
 .details {
     height: 300px;
-    width: 200px;
+    width: 100%;
     position: absolute;
     top: 0;
     left: 0;
     background-color: black;
     opacity: 80%;
+}
+
+.cover img {
+    height: 278px;
+}
+
+li.center {
+    text-align: center;
+    background-color: red
+}
+
+.overview {
+    height: 55px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
 }
 
 
