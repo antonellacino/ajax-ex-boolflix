@@ -20,7 +20,7 @@
                 <button id="search">Cerca</button>
             </div>
         </header>
-        <main class="container">
+        <main>
 
             <div class="filmList">
 
@@ -34,9 +34,10 @@
 
     <!--handlebars template------------------------->
     <script id="films-template" type="text/x-handlebars-template">
+
         <ul class="film">
             <div class="cover">{{{cover}}}</div>
-            <div>
+            <div class="details hidden">
                 <h2>Titolo: {{title}}</h2>
                 <li>Titolo Originale: {{originalTitle}}</li>
                 <li>Lingua: {{{language}}}</li>
@@ -45,6 +46,7 @@
                 <li>Tipo: {{type}}</li>
             </div>
         </ul>
+
     </script>
 
 

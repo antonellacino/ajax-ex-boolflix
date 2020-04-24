@@ -10,11 +10,9 @@ $(document).ready(function() {
         }
 
         //chiamata ajax films
-        callFilmList("https://api.themoviedb.org/3/search/movie", apiKey, userSearch, "Film");
+        callFilmList("https://api.themoviedb.org/3/search/movie", apiKey, userSearch, "Movie");
         //chiamata ajax serieTv
         callFilmList("https://api.themoviedb.org/3/search/tv", apiKey, userSearch, "SerieTv");
-
-
 
     });
 
@@ -64,13 +62,14 @@ $(document).ready(function() {
             };
             var html = template(context);
             $('.filmList').append(html);
+
         }
     }
     //-----------------------------------------------------------------------
     function generateCover(url) {
         var cover = "<img src='https://image.tmdb.org/t/p/w185/" + url + "'>";
         if (url === null) {
-            cover = "Immagine non disponibile";
+            cover = "<img src='img/immagine-non-disponibile.jpg' class='no-disponible'>";
         }
         return cover;
     }
